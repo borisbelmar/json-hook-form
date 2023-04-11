@@ -11,9 +11,10 @@ export default function TextFieldMock({ field }: FieldProps) {
       </label>
       <input
         {...register(field.name)}
+        disabled={!Array.isArray(field.disabled) ? field.disabled : false}
         type={field.textType || 'text'}
         placeholder={field.placeholder}
-        className="border border-gray-300 rounded-md block"
+        className="border border-gray-300 rounded-md block disabled:opacity-50 disabled:cursor-not-allowed"
       />
     </div>
   )

@@ -32,6 +32,9 @@ const meta: Meta<typeof WithConditions> = {
       table: {
         disable: true
       }
+    },
+    onHiddenChange: {
+      action: 'hidden changed'
     }
   }
 }
@@ -45,7 +48,7 @@ type Story = StoryObj<typeof WithConditions>
  * See https://storybook.js.org/docs/react/api/csf
  * to learn how to use render functions.
  */
-export const WithNotHiddenComponent: Story = {
+export const WithNotHiddenOrDisabledComponent: Story = {
   args: {
     field: mockField
   },
@@ -66,7 +69,20 @@ export const WithHiddenComponent: Story = {
   )
 }
 
-export const WithHiddenConditions: Story = {
+export const WithDisabledComponent: Story = {
+  args: {
+    field: {
+      ...mockField,
+      placeholder: 'This field is disabled',
+      disabled: true
+    }
+  },
+  render: ({ field }) => (
+    <WithConditions field={field} Component={TextFieldMock} />
+  )
+}
+
+export const WithHiddenCondition: Story = {
   args: {
     field: {
       ...mockField,
@@ -79,10 +95,77 @@ export const WithHiddenConditions: Story = {
       ]
     }
   },
-  render: ({ field }) => (
+  render: ({ field, onHiddenChange }) => (
     <div className="space-y-2">
-      <TextFieldMock field={{ name: 'testField2', label: 'Test Field 2', type: 'string', placeholder: 'Write "test" to hide ' }} />
-      <WithConditions field={field} Component={TextFieldMock} />
+      <TextFieldMock
+        field={{ name: 'testField2', label: 'Test Field 2', type: 'string', placeholder: 'Write "test" to hide' }}
+      />
+      <WithConditions
+        field={field}
+        Component={TextFieldMock}
+        onHiddenChange={onHiddenChange}
+      />
+    </div>
+  )
+}
+
+export const WithDisabledCondition: Story = {
+  args: {
+    field: {
+      ...mockField,
+      disabled: [
+        {
+          field: 'testField2',
+          compare: 'eq',
+          value: 'test'
+        }
+      ]
+    }
+  },
+  render: ({ field, onHiddenChange }) => (
+    <div className="space-y-2">
+      <TextFieldMock
+        field={{ name: 'testField2', label: 'Test Field 2', type: 'string', placeholder: 'Write "test" to disable' }}
+      />
+      <WithConditions
+        field={field}
+        Component={TextFieldMock}
+        onHiddenChange={onHiddenChange}
+      />
+    </div>
+  )
+}
+
+export const WithDisabledAndHiddenCondition: Story = {
+  args: {
+    field: {
+      ...mockField,
+      disabled: [
+        {
+          field: 'testField2',
+          compare: 'eq',
+          value: 'disable'
+        }
+      ],
+      hidden: [
+        {
+          field: 'testField2',
+          compare: 'eq',
+          value: 'hide'
+        }
+      ]
+    }
+  },
+  render: ({ field, onHiddenChange }) => (
+    <div className="space-y-2">
+      <TextFieldMock
+        field={{ name: 'testField2', label: 'Test Field 2', type: 'string', placeholder: 'Write "disable" or "hide" for changes' }}
+      />
+      <WithConditions
+        field={field}
+        Component={TextFieldMock}
+        onHiddenChange={onHiddenChange}
+      />
     </div>
   )
 }

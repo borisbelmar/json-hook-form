@@ -1,4 +1,3 @@
-import getFieldType from '@/utils/getFieldType'
 import type { FieldCollection, FieldProps } from '@/@types'
 
 interface Props extends FieldProps {
@@ -7,7 +6,7 @@ interface Props extends FieldProps {
 }
 
 const getFieldComponent = ({ field, fieldComponents }: Props) => {
-  const type = getFieldType(field.type, field.fieldType)
+  const type = field.fieldType || 'text'
 
   const FieldComponent = fieldComponents[type]
 
