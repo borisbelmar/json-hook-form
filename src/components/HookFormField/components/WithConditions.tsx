@@ -1,9 +1,8 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { memo, useEffect, useMemo } from 'react'
 import type { Field, FieldComponent, FieldProps } from '@/@types'
-import useFieldHidden from '../hooks/useFieldConditions'
+import useFieldConditions from '../hooks/useFieldConditions'
 
-interface Props extends FieldProps {
+export interface Props extends FieldProps {
   Component: FieldComponent
   field: Field
   onHiddenChange?: (name: string, isHidden: boolean) => void
@@ -14,7 +13,7 @@ function WithConditions({
   onHiddenChange,
   Component
 }: Props) {
-  const { isDisabled, isHidden } = useFieldHidden({ field })
+  const { isDisabled, isHidden } = useFieldConditions({ field })
 
   useEffect(() => {
     onHiddenChange?.(field.name, isHidden)

@@ -17,7 +17,7 @@
     "skipLibCheck": true,
     "strict": true,
     "typeRoots": ["./node_modules/@types", "./src/@types"],
-    "types": ["jest"],
+    "types": ["jest", "@testing-library/jest-dom"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
