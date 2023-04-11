@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: 
       contents: read
-      packages: write 
+      packages: read-write
 
     steps:
       - name: Checkout code
@@ -23,6 +23,8 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@borisbelmar'
           always-auth: true
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Cache node modules
         uses: actions/cache@v2
