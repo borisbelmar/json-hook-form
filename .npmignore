@@ -11,3 +11,6 @@ coverage
 .github
 .DS_Store
 .husky
+.babelrc
+tailwind.config.js
+postcss.config.js

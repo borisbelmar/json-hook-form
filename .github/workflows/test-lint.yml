@@ -9,9 +9,6 @@ on:
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
-    permissions: 
-      contents: read
-      packages: read
 
     steps:
       - name: Checkout code
@@ -29,8 +26,6 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
         run: yarn ci

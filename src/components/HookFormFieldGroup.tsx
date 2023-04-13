@@ -1,7 +1,7 @@
+import useGroup from '@/hooks/useGroup'
 import clsx from 'clsx'
 import { memo } from 'react'
 import type { Field, FieldCollection } from '../@types'
-import { GroupProvider, useGroup } from '../context/GroupContext'
 import getTailwindGridByCols from '../utils/getTailwindGridCols'
 import HookFormField from './HookFormField/HookFormField'
 
@@ -20,7 +20,8 @@ function HookFormFieldGroup({
   fields,
   fieldComponents
 }: Props) {
-  const { allHidden, onHiddenChange } = useGroup()
+  const { allHidden, onHiddenChange } = useGroup(fields)
+
   return (
     <div className={clsx(allHidden && 'hidden')}>
       {title && (
@@ -56,24 +57,4 @@ function HookFormFieldGroup({
   )
 }
 
-function HookFormFieldGroupWithContext({
-  title,
-  cols = 1,
-  separator,
-  fields,
-  fieldComponents
-}: Props) {
-  return (
-    <GroupProvider fields={fields}>
-      <HookFormFieldGroup
-        title={title}
-        cols={cols}
-        separator={separator}
-        fields={fields}
-        fieldComponents={fieldComponents}
-      />
-    </GroupProvider>
-  )
-}
-
-export default memo(HookFormFieldGroupWithContext)
+export default memo(HookFormFieldGroup)
