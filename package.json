@@ -30,7 +30,7 @@
   "author": "Boris Belmar <borisbelmarm@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@borisbelmar/yup-schema-generator": "1.0.1",
+    "@borisbelmar/yup-schema-generator": "1.0.3",
     "clsx": "1.2.1"
   },
   "peerDependencies": {
