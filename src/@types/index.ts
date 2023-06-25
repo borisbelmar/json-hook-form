@@ -8,14 +8,6 @@ export interface Option {
   helpText?: string
 }
 
-export interface FileDescriptor {
-  name: string
-  size: number
-  type: string
-  file?: File
-  url?: string
-}
-
 export type Condition = {
   field: string
   value?: unknown
